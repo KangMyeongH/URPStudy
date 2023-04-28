@@ -1,4 +1,5 @@
  // Shader 시작. 셰이더의 폴더와 이름을 여기서 결정합니다.
+ 
 Shader "Basic_01"
 {
     Properties
@@ -43,7 +44,9 @@ Shader "Basic_01"
             {
            	    float4 vertex : SV_POSITION;
       	    };
-            half4 _TintColor;
+
+            float _Intensity;
+            float4 _TintColor;
 
             //버텍스 셰이더
       	    VertexOutput vert(VertexInput v)
@@ -57,9 +60,9 @@ Shader "Basic_01"
             //픽셀 셰이더
             half4 frag(VertexOutput i) : SV_Target
             {   	
-                return half4(_TintColor);  
+                float4 color = _TintColor * _Intensity;
+                return color;
             }
-
         	ENDHLSL  
     	}
     }
